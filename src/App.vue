@@ -44,4 +44,11 @@
     .container {
         padding: 0 20px;
     }
+
+    .block {
+        margin: 20px 0;
+        border: solid 1px #fdffa0;
+        padding: 15px;
+        background: #4f4f4f;
+    }
 </style>

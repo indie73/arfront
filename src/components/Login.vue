@@ -50,10 +50,10 @@
         font-size: 14px;
 
         .content {
-            border: solid 1px #cccccc;
+            border: solid 1px #fdffa0;
             padding: 25px;
-            color: #000;
-            background: #ffffff;
+            color: #fdffa0;
+            background: #4f4f4f;
         }
 
         .errors {
@@ -74,12 +74,13 @@
 
             input {
                 outline: none;
-                border: solid 1px #d4d4d4;
+                border: solid 1px #fdffa0;
                 border-radius: 5px;
                 padding: 0 15px;
                 width: 100%;
                 height: 30px;
-                background: #fff;
+                color: #fdffa0;
+                background: #4f4f4f;
 
                 &:focus {
                     box-shadow: inset 1px 2px 3px rgba(#000, 0.15);
@@ -95,12 +96,12 @@
                 border: none;
                 width: 80px;
                 height: 30px;
-                color: #fff;
-                background: dodgerblue;
+                color: #4f4f4f;
+                background: #fdffa0;
                 cursor: pointer;
 
                 &:hover {
-                    background: lighten(dodgerblue, 10%);
+                    background: darken(#fdffa0, 10%);
                 }
             }
         }

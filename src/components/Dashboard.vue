@@ -1,42 +1,34 @@
-<template>
-    <div class="container">
-        <div class="list">
-            <table>
-                <thead>
-                <tr>
-                    <th>Код</th>
-                    <th>Название</th>
-                    <th>Количество</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="detail in this.details"
-                    :key="detail.id">
-                    <td>{{detail.shortName}}</td>
-                    <td>{{detail.name}}</td>
-                    <td>{{detail.count}}</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="list">
-            <table>
-                <thead>
-                <tr>
-                    <th>Код</th>
-                    <th>Описание</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="detail in this.steps"
-                    :key="detail.id">
-                    <td>{{detail.id}}</td>
-                    <td>{{detail.description}}</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+<template lang="pug">
+    .container
+        .block
+            .list
+                .title
+                    | Необходимые детали
+                table
+                    thead
+                        tr
+                            th Код
+                            th Название
+                            th Количество
+                    tbody
+                        tr(v-for="detail in this.details"
+                            :key="detail.id")
+                            td {{detail.shortName}}
+                            td {{detail.name}}
+                            td {{detail.count}}
+            .list
+                .title
+                    | Шаги сборки
+                table
+                    thead
+                        tr
+                            th Код
+                            th Описание
+                    tbody
+                        tr(v-for="detail in this.steps"
+                            :key="detail.id")
+                            td {{detail.id}}
+                            td {{detail.description}}
 </template>
 
 <script>
@@ -66,21 +58,36 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-    h3 {
-        margin: 40px 0 0;
+    .title {
+        font-weight: 700;
+        margin: 0 0 15px;
+        text-align: left;
     }
 
-    ul {
-        list-style-type: none;
-        padding: 0;
-    }
+    .list {
+        text-align: left;
 
-    li {
-        display: inline-block;
-        margin: 0 10px;
-    }
+        + .list {
+            margin-top: 50px;
+        }
 
-    a {
-        color: #42b983;
+        table {
+            th {
+                padding: 5px 15px;
+
+                + th {
+                    border-left: solid 1px #fdffa0;
+                }
+            }
+
+            td {
+                border-top: solid 1px #fdffa0;
+                padding: 5px 15px;
+
+                + td {
+                    border-left: solid 1px #fdffa0;
+                }
+            }
+        }
     }
 </style>
