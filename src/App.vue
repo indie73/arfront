@@ -1,10 +1,6 @@
 <template>
     <div id="app">
-        <div id="nav" v-if="this.logined">
-            <router-link to="/">Home</router-link>
-            |
-            <router-link to="/about">About</router-link>
-        </div>
+        <Menu v-if="this.logined" />
         <Login v-if="!this.logined" msg="Welcome to Your Vue.js App"/>
         <router-view v-if="this.logined"/>
     </div>
@@ -12,10 +8,12 @@
 
 <script>
     import Login from '@/components/Login.vue'
+    import Menu from '@/components/Menu.vue'
 
     export default {
         components: {
             Login,
+            Menu,
         },
         data() {
             return {
@@ -31,6 +29,8 @@
         box-sizing: border-box;
     }
     body {
+        font-family: Helvetica, sans-serif;
+        font-size: 14px;
         color: #f09a3b;
         background: #454545;
     }
@@ -41,16 +41,7 @@
         text-align: center;
     }
 
-    #nav {
-        padding: 30px;
-
-        a {
-            font-weight: bold;
-            color: #2c3e50;
-
-            &.router-link-exact-active {
-                color: #42b983;
-            }
-        }
+    .container {
+        padding: 0 20px;
     }
 </style>

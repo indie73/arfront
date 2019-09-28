@@ -61,11 +61,6 @@
                     });
             }
         },
-        watch:{
-            details(){
-                console.log(this.details)
-            },
-        },
     }
 </script>
 
