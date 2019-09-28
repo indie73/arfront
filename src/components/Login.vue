@@ -41,18 +41,19 @@
     }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
     .login {
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 80vh;
+        height: 100vh;
         font-size: 14px;
 
         .content {
             border: solid 1px #cccccc;
             padding: 25px;
+            color: #000;
+            background: #ffffff;
         }
 
         .errors {

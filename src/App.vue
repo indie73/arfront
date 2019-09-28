@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <div id="nav">
+        <div id="nav" v-if="this.logined">
             <router-link to="/">Home</router-link>
             |
             <router-link to="/about">About</router-link>
@@ -30,12 +30,15 @@
         padding: 0;
         box-sizing: border-box;
     }
+    body {
+        color: #f09a3b;
+        background: #454545;
+    }
     #app {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
-        color: #2c3e50;
     }
 
     #nav {
