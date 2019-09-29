@@ -3,43 +3,29 @@
         .block
             .list
                 .title
-                    | Необходимые детали
+                    | Список инструкций
                 table
                     thead
                         tr
-                            th Код
+                            th Номер
                             th Название
-                            th Количество
+                            th Ссылка
                     tbody
-                        tr(v-for="detail in this.details"
-                            :key="detail.id")
-                            td {{detail.shortName}}
-                            td {{detail.name}}
-                            td {{detail.count}}
-            .list
-                .title
-                    | Шаги сборки
-                table
-                    thead
-                        tr
-                            th Код
-                            th Описание
-                    tbody
-                        tr(v-for="detail in this.steps"
-                            :key="detail.id")
-                            td {{detail.id}}
-                            td {{detail.description}}
+                        tr(v-for="instruction in instructions"
+                            :key="instruction.id")
+                            td {{instruction.id}}
+                            td {{instruction.name}}
+                            td
+                                router-link(:to="'/instructions/' + instruction.id") Перейти
 </template>
 
 <script>
     import axios from 'axios'
 
     export default {
-        props: ['id'],
         data() {
             return {
-                details: null,
-                steps: null,
+                instructions: null,
             }
         },
         created() {
@@ -47,17 +33,15 @@
         },
         methods: {
             getInstructions() {
-                axios.get(`http://indieteam.online/api/v1/instructions/${this.id}`, {})
+                axios.get('http://indieteam.online/api/v1/instructions', {})
                     .then(response => {
-                        this.steps = response.data.steps;
-                        this.details = response.data.details;
+                        this.instructions = response.data.instructions;
                     });
             }
         },
     }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
     .title {
         font-weight: 700;
@@ -87,6 +71,14 @@
 
                 + td {
                     border-left: solid 1px #fdffa0;
+                }
+
+                a {
+                    color: inherit;
+
+                    &:hover {
+                        color: #fdffa0;
+                    }
                 }
             }
         }

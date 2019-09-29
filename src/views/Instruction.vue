@@ -1,17 +1,17 @@
 <template>
   <div class="home">
-    <Instructions />
+    <Instruction :id="$route.params.id" />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Instructions from '@/components/Instructions.vue'
+import Instruction from '@/components/Instruction.vue'
 
 export default {
   name: 'home',
   components: {
-    Instructions,
+    Instruction,
   },
   data() {
     return {

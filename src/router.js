@@ -13,10 +13,15 @@ export default new Router({
       name: 'home',
       component: Home
     },
-    // {
-    //   path: '/about',
-    //   name: 'about',
-    //   component: () => import('./views/About.vue')
-    // }
+    {
+      path: '/instructions/:id',
+      name: 'instructions',
+      component: () => import('./views/Instruction.vue')
+    },
+    {
+      path: '/points',
+      name: 'points',
+      component: () => import('./views/Points.vue')
+    }
   ]
 })

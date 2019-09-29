@@ -7,14 +7,14 @@
                      router-link(
                         to="/"
                         v-slot="{ href, route, navigate, isActive, isExactActive }")
-                        a(:class="isActive ? 'is-active' : ''" :href="href")
+                        router-link(:class="isExactActive ? 'is-active' : ''" :to="href" exact)
                             img(:src="require('../assets/icon-2.png')")
                             | Материалы инструкции
                 li
                     router-link(
                         to="/points"
                         v-slot="{ href, route, navigate, isActive, isExactActive }")
-                        a(:class="isActive ? 'is-active' : ''" :href="href")
+                        router-link(:class="isActive ? 'is-active' : ''" :to="href")
                             img(:src="require('../assets/icon-1.png')")
                             | Контрольние точки
             ul
@@ -89,6 +89,10 @@
                     };
                 }
             }
+        }
+
+        @media print {
+            display: none;
         }
     }
 </style>
