@@ -19,16 +19,14 @@
                             | Контрольние точки
             ul
                 li
-                    button(type="button" v-on:click.prevent="print()")
-                        | Печать
+                    a(href="/" v-on:click.prevent="logOut()")
+                        img(:src="require('../assets/icon-3.png')")
+                        | Выход
 </template>
 
 <script>
     export default {
         methods: {
-            print() {
-                window.print();
-            }
         },
     }
 </script>
