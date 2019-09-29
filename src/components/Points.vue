@@ -16,14 +16,15 @@
                             :key="point.id")
                             td {{point.id}}
                             td {{point.username}}
-                            td {{moment(point.time).format('h:mm:ss')}}
+                            td {{new Date(point.time * 1000) | moment("DD-MM-YYYY, h:mm:ss")}}
                             td
                                 router-link(:to="'/instructions/' + point.instructionId") Посмотреть инструкцию
+
 </template>
 
 <script>
     import axios from 'axios'
-    import moment from 'moment'
+    import {moment} from 'moment'
 
     export default {
         data() {
@@ -43,6 +44,23 @@
             },
             moment() {
                 return moment();
+            },
+            formatDate(date) {
+                let monthNames = [
+                    "January", "February", "March",
+                    "April", "May", "June", "July",
+                    "August", "September", "October",
+                    "November", "December"
+                ];
+
+                let day = date.getDate();
+                let monthIndex = date.getMonth();
+                let year = date.getFullYear();
+                let hours = date.getHours();
+                let minuts = date.getMinutes();
+                let seconds = date.getSeconds();
+
+                return `${day} ${monthNames[monthIndex]} ${year} ${hours}:${minuts}:${seconds}`;
             }
         },
     }
