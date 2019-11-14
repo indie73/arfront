@@ -36,7 +36,7 @@
 						.model
 							model-obj(
 								:backgroundAlpha="0"
-								src=this.model)
+								:src="this.model")
 </template>
 
 <script>
@@ -49,7 +49,7 @@
 			return {
 				details: null,
 				steps: null,
-				model: null,
+				models: null,
 			}
 		},
 		created() {
@@ -64,7 +64,7 @@
 						this.details = response.data.details;
 						this.model = response.data.referenceModelLink;
 					});
-			}
+			},
 		},
 	}
 </script>
@@ -113,5 +113,6 @@
 	.model {
 		margin-left: 150px;
 		width: 500px;
+		height: 500px;
 	}
 </style>
