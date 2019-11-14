@@ -34,9 +34,13 @@
 										td {{detail.description}}
 					td
 						.model
-							model-obj(
-								:backgroundAlpha="0"
-								:src="this.model")
+							.model__view
+								model-obj(
+									:backgroundAlpha="0"
+									:src="this.model")
+							.model__controls
+								button(type="button" v-on:click="assembleModel()" v-if="!assembleModelState") Собрать
+								button(type="button" v-on:click="disassembleModel()" v-if="assembleModelState") Разобрать
 					td
 						.pdf
 							.pdf__counter
@@ -65,11 +69,14 @@
 			return {
 				details: null,
 				steps: null,
+				modelResponse: null,
 				model: null,
+				assembleModelState: true,
 				pdfView: null,
 				numPages: undefined,
 				currentPage: 1,
 				pageCount: 0,
+				intersected: null,
 			}
 		},
 		created() {
@@ -85,7 +92,8 @@
 					.then(response => {
 						this.steps = response.data.steps;
 						this.details = response.data.details;
-						this.model = response.data.referenceModelLink;
+						this.modelResponse = [response.data.referenceModelLink, 'http://indieteam.online/uploads/dis_stul.obj'];
+						this.model = this.modelResponse[0];
 						this.pdfView = 'http://indieteam.online/uploads/stul.pdf';
 					});
 			},
@@ -102,6 +110,14 @@
 				} else {
 					this.currentPage++;
 				}
+			},
+			assembleModel() {
+				this.model = this.modelResponse[0];
+				this.assembleModelState = true;
+			},
+			disassembleModel() {
+				this.model = this.modelResponse[1];
+				this.assembleModelState = false;
 			},
 		},
 	}
@@ -151,10 +167,35 @@
 	}
 
 	.model {
-		display: block;
 		margin-left: 25px;
-		width: 400px;
-		height: 400px;
+
+		&__view {
+			display: block;
+			margin: 0 auto;
+			width: 300px;
+			height: 400px;
+		}
+
+		&__controls {
+			margin-top: 10px;
+
+			button {
+				display: inline-block;
+				vertical-align: middle;
+				margin: 0 5px;
+				outline: none;
+				border: none;
+				padding: 5px 15px;
+				font-weight: 700;
+				font-size: 18px;
+				background: #fdffa0;
+				cursor: pointer;
+
+				&:disabled {
+					opacity: 0.5;
+				}
+			}
+		}
 	}
 
 	.pdf {
