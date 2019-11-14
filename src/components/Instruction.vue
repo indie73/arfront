@@ -37,11 +37,27 @@
 							model-obj(
 								:backgroundAlpha="0"
 								:src="this.model")
+					td
+						.pdf
+							.pdf__counter
+								| {{currentPage}} / {{pageCount}}
+							.pdf__view
+								pdf(
+									:src="this.pdfView"
+									:page="currentPage"
+									@num-pages="pageCount = $event"
+									@page-loaded="currentPage = $event")
+							.pdf__controls
+								button(v-on:click="pdfPrev()" :disabled="currentPage == 1") <<
+								button(v-on:click="pdfNext()" :disabled="currentPage == pageCount") >>
 </template>
 
 <script>
 	import axios from 'axios';
 	import {ModelObj} from 'vue-3d-model';
+	import pdf from 'vue-pdf';
+
+	let loadingTask = pdf.createLoadingTask('http://indieteam.online/uploads/stul.pdf');
 
 	export default {
 		props: ['id'],
@@ -49,13 +65,20 @@
 			return {
 				details: null,
 				steps: null,
-				models: null,
+				model: null,
+				pdfView: null,
+				numPages: undefined,
+				currentPage: 1,
+				pageCount: 0,
 			}
 		},
 		created() {
 			this.getInstructions()
 		},
-		components: {ModelObj},
+		components: {
+			ModelObj,
+			pdf,
+		},
 		methods: {
 			getInstructions() {
 				axios.get(`http://indieteam.online/api/v1/instructions/${this.id}`, {})
@@ -63,7 +86,22 @@
 						this.steps = response.data.steps;
 						this.details = response.data.details;
 						this.model = response.data.referenceModelLink;
+						this.pdfView = 'http://indieteam.online/uploads/stul.pdf';
 					});
+			},
+			pdfPrev() {
+				if(this.currentPage - 1 < 1) {
+					this.currentPage = 1;
+				} else {
+					this.currentPage--;
+				}
+			},
+			pdfNext() {
+				if(this.currentPage + 1 > this.pageCount) {
+					this.currentPage = this.pageCount;
+				} else {
+					this.currentPage++;
+				}
 			},
 		},
 	}
@@ -105,14 +143,55 @@
 	}
 
 	.model-table {
+		width: 100%;
+
 		td {
 			vertical-align: top;
 		}
 	}
 
 	.model {
-		margin-left: 150px;
-		width: 500px;
-		height: 500px;
+		display: block;
+		margin-left: 25px;
+		width: 400px;
+		height: 400px;
+	}
+
+	.pdf {
+		margin-left: 25px;
+
+		&__counter {
+			margin-bottom: 10px;
+			font-weight: 700;
+			font-size: 18px;
+			text-align: center;
+		}
+
+		&__view {
+			> span {
+				width: 500px;
+			}
+		}
+
+		&__controls {
+			margin-top: 10px;
+
+			button {
+				display: inline-block;
+				vertical-align: middle;
+				margin: 0 5px;
+				outline: none;
+				border: none;
+				padding: 5px 15px;
+				font-weight: 700;
+				font-size: 18px;
+				background: #fdffa0;
+				cursor: pointer;
+
+				&:disabled {
+					opacity: 0.5;
+				}
+			}
+		}
 	}
 </style>
