@@ -3,7 +3,7 @@
         .block
             .list
                 .title
-                    | Список инструкций
+                    | Контрольные точки
                 table
                     thead
                         tr
