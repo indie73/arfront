@@ -92,9 +92,9 @@
 					.then(response => {
 						this.steps = response.data.steps;
 						this.details = response.data.details;
-						this.modelResponse = [response.data.referenceModelLink, 'http://indieteam.online/uploads/dis_stul.obj'];
+						this.modelResponse = [response.data.referenceModelLink, response.data.disReferenceModelLink];
 						this.model = this.modelResponse[0];
-						this.pdfView = 'http://indieteam.online/uploads/stul.pdf';
+						this.pdfView = response.data.pdf;
 					});
 			},
 			pdfPrev() {
